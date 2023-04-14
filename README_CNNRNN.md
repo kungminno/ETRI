@@ -5,6 +5,11 @@ CNNRNN 사용법
 ### CNNRNN 주의 사항
 
  - __경로 지정 필요__
+ - **CNN_RNN_fold_epoch60_e4.h5, test_final.pickle, train_final.pickle 파일은 아래 링크에서 다운로드 필요**
+    - [CNN_RNN_fold_epoch60_e4.h5](https://drive.google.com/file/d/1xxbqwqIjokoc57FtlGo6ZRyTNRkenemK/view?usp=sharing)
+    - [test_final.pickle](https://drive.google.com/file/d/1FK5WQv9CIXlG9CMH3aoN2gLLacXGuSaX/view?usp=sharing)
+    - [train_final.pickle](https://drive.google.com/file/d/1U8EMfPXQ9_sCPh29HLT8BLC6Ktk4nZnU/view?usp=sharing)
+ - 그 외의 파일은 ETRI/CNNRNN 폴더 내 존재
  - Used library:  	
     -   python==3.9
     -   tensorflow==2.9.1
