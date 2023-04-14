@@ -4,7 +4,7 @@ CNNRNN 사용법
 
 ### CNNRNN 주의 사항
 
- - <span style="background-color:yellow">__경로 지정 필요__</span>  
+ - __경로 지정 필요__
  - Used library:  	
     -   python==3.9
     -   tensorflow==2.9.1
