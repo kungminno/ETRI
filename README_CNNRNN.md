@@ -34,8 +34,8 @@ CNNRNN 사용법
 	- data_train, data_test		: train_audio, test_audio 파일을 데이터프레임 형식으로 변환 후, mel spectrogram 추출. 해당 spectrogram의 정보(파일명(.png), 저장 위치, label)를 담은 딕셔너리 형식 파일(.pickle)
         - ex
 		> data_train['id'][0] = 'Sess01_impro04_F013'
-    	> data_train['path'][0] = './Sess01_impro04_F013.png'
-    	> data_train['emotion'][0] = 1
+    	>>data_train['path'][0] = './Sess01_impro04_F013.png'
+    	>>>data_train['emotion'][0] = 1
 
 	- train_final, test_final	: data_train, data_test에서 ['path']에 존재하는 이미지를 불러와 딕셔너리 값으로 변경한 딕셔너리 형식 파일(.pickle)
         - ex
