@@ -4,7 +4,7 @@ CNNRNN 사용법
 
 ### CNNRNN 주의 사항
 
- - <span style='background-color:#fff5b1'>파일 경로 지정 필요</span>
+ - <span style="background-color:yellow">__경로 지정 필요__</span>  
  - Used library:  	
     -   python==3.9
     -   tensorflow==2.9.1
@@ -31,7 +31,7 @@ CNNRNN 사용법
  2. data_CNNRNN에서의 파일 설명: 
 	- train, test			: 각 Session 별 8:2 비율로 저장한 데이터(.json)
 	- train_audio, test_audio	: train_audio, test_audio 파일을 전처리 하기 편하게 변환시킨 데이터(.json)
-	- data_train, data_test		: train_audio, test_audio 파일을 데이터프레임 형식으로 변환 후, mel spectrogram 추출. 해당 spectrogram의 정보(파일명(.png), 저장 위치, label)를 담은 딕셔너리 형식 파일(.pickle)
+	- data_train, data_test		: train_audio, test_audio 파일을 데이터프레임 형식으로 변환 후, mel spectrogram 추출. 해당 spectrogram의 정보(파일명, 저장 위치, label)를 담은 딕셔너리 형식 파일(.pickle)
         - ex
 		> data_train['id'][0] = 'Sess01_impro04_F013'  
     	>data_train['path'][0] = './Sess01_impro04_F013.png'  
@@ -52,11 +52,11 @@ CNNRNN 사용법
 	- Test dataset load
 	- 3에서 돌린 모델 or 미리 완성해 load한 모델을 사용해 test dataset predict
 
-CNNRNN parameter values 
-> Learning Rate		: 1e-4  
-> Batch size			: 16    
-> Epoch				: 60
-> Optimization Function	: Adam(beta_1=0.9, beta_2=0.999)    
+    CNNRNN parameter values 
+    > Learning Rate		: 1e-4  
+    > Batch size			: 16    
+    > Epoch				: 60
+    > Optimization Function	: Adam(beta_1=0.9, beta_2=0.999)    
 
 
  2. main_CNNRNN에서의 파일 설명:
