@@ -55,7 +55,7 @@ CNNRNN 사용법
 	- Train dataset load
 	- 5-fold cross-validation 적용해서 모델 학습(이 모델을 다 돌려보지 않아도 기존의 완성된 모델 load해서 사용 가능)
 	- Test dataset load
-	- 3에서 돌린 모델 or 미리 완성해 load한 모델을 사용해 test dataset predict
+	- 위에서 돌린 모델 or 미리 완성해 load한 모델을 사용해 test dataset predict
 
     CNNRNN parameter values 
     > Learning Rate		: 1e-4  
