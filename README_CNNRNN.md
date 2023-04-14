@@ -2,7 +2,7 @@ CNNRNN 사용법
 =================
 
 
-### CNNRNN 주의 사항
+### CNNRNN 주의 사항 
 
  - __경로 지정 필요__
  - **CNN_RNN_fold_epoch60_e4.h5, test_final.pickle, train_final.pickle 파일은 아래 링크에서 다운로드 필요**
