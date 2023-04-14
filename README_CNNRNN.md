@@ -35,7 +35,7 @@ CNNRNN 사용법
         - ex
 		> data_train['id'][0] = 'Sess01_impro04_F013'
     	>>data_train['path'][0] = './Sess01_impro04_F013.png'
-    	>>>data_train['emotion'][0] = 1
+    	>>data_train['emotion'][0] = 1
 
 	- train_final, test_final	: data_train, data_test에서 ['path']에 존재하는 이미지를 불러와 딕셔너리 값으로 변경한 딕셔너리 형식 파일(.pickle)
         - ex
