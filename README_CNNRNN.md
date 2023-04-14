@@ -33,15 +33,15 @@ CNNRNN 사용법
 	- train_audio, test_audio	: train_audio, test_audio 파일을 전처리 하기 편하게 변환시킨 데이터(.json)
 	- data_train, data_test		: train_audio, test_audio 파일을 데이터프레임 형식으로 변환 후, mel spectrogram 추출. 해당 spectrogram의 정보(파일명(.png), 저장 위치, label)를 담은 딕셔너리 형식 파일(.pickle)
         - ex
-		> data_train['id'][0] = 'Sess01_impro04_F013'
-    	>>data_train['path'][0] = './Sess01_impro04_F013.png'
-    	>>data_train['emotion'][0] = 1
+		> data_train['id'][0] = 'Sess01_impro04_F013'  
+    	>data_train['path'][0] = './Sess01_impro04_F013.png'  
+    	>data_train['emotion'][0] = 1  
 
 	- train_final, test_final	: data_train, data_test에서 ['path']에 존재하는 이미지를 불러와 딕셔너리 값으로 변경한 딕셔너리 형식 파일(.pickle)
         - ex
-		> train_final['id'][0] = 'Sess01_impro04_F013'
-    	> train_final['path'][0] = [[[  1,   0,   0],[  2,   0,   0], [  2,   0,   0]...,[  2,   0,   0],[  2,   0,   0],[  2,   0,   0]] ..., 
-   	 	> train_final['emotion'][0] = 1
+		> train_final['id'][0] = 'Sess01_impro04_F013'  
+    	> train_final['path'][0] = [[[  1,   0,   0],[  2,   0,   0], [  2,   0,   0]...,[  2,   0,   0],[  2,   0,   0],[  2,   0,   0]] ...,   
+   	 	> train_final['emotion'][0] = 1  
 
 
 ### main_CNNRNN: CNNRNN 모델 학습 파일
