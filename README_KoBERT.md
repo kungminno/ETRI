@@ -19,7 +19,11 @@
 * new_softmax
 * predict
 
+*****
+
 ## Model Learning
+
+*****
 
 ## Learned model Test
 
