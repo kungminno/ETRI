@@ -20,7 +20,7 @@
 3. save_json 함수는 딕셔너리를 json 파일로 저장합니다.
 4. json_to_csv 함수는 json 파일을 csv 파일로 변환합니다.
 
-=====
+*****
 
 ## column_extraction
 > 이 함수는 KEMDy19 데이터셋의 csv 파일에서 필요한 열만 추출하여 데이터프레임과 인덱스 배열을 반환하는 파이썬 함수입니다.
