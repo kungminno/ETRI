@@ -43,7 +43,7 @@
 
 ## process_emotion  
 ### Introduction
-이 함수는 주어진 DataFrame에서 선택한 인덱스의 음성 파일에 대한 정보를 추출하고, 감정 레이블에 따라 사전(dictionary)에 정보를 저장하는 파이썬 함수입니다.
+이 함수는 주어진 DataFrame에서 선택한 인덱스의 파일에 대한 정보를 추출하고, 감정 레이블에 따라 사전(dictionary)에 정보를 저장하는 파이썬 함수입니다.
 
 ### Usage
 1. DataFrame에서 주어진 인덱스(idx_array)를 이용하여 각각의 텍스트 및 음성 파일에 대한 정보를 추출합니다.
