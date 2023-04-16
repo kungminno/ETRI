@@ -40,10 +40,10 @@
     3. re.sub() 함수를 이용하여 연속된 공백을 하나의 공백으로 변환합니다.
     4. 변경된 파일 내용을 반환합니다.
 
-## process_emotion
-> 이 함수는 주어진 DataFrame에서 선택한 인덱스의 음성 파일에 대한 정보를 추출하고, 감정 레이블에 따라 사전(dictionary)에 정보를 저장하는 파이썬 함수입니다.
+* process_emotion
+    * 이 함수는 주어진 DataFrame에서 선택한 인덱스의 음성 파일에 대한 정보를 추출하고, 감정 레이블에 따라 사전(dictionary)에 정보를 저장하는 파이썬 함수입니다.
 
-1. DataFrame에서 주어진 인덱스(idx_array)를 이용하여 각각의 텍스트 및 음성 파일에 대한 정보를 추출합니다.
-2. 추출한 정보를 이용하여 파일 경로 및 파일 내용을 가져옵니다.
-3. 감정 레이블(total_eval)이 emotions 리스트에 있는 경우, 해당 음성 파일에 대한 정보를 dictionary에 저장합니다. 저장되는 정보는 Emotion, Label, WavPath, Text 입니다.
-4. 감정 레이블(total_eval)이 emotions 리스트에 없는 경우 해당 파일은 처리되지 않습니다. 
+    1. DataFrame에서 주어진 인덱스(idx_array)를 이용하여 각각의 텍스트 및 음성 파일에 대한 정보를 추출합니다.
+    2. 추출한 정보를 이용하여 파일 경로 및 파일 내용을 가져옵니다.
+    3. 감정 레이블(total_eval)이 emotions 리스트에 있는 경우, 해당 음성 파일에 대한 정보를 dictionary에 저장합니다. 저장되는 정보는 Emotion, Label, WavPath, Text 입니다.
+    4. 감정 레이블(total_eval)이 emotions 리스트에 없는 경우 해당 파일은 처리되지 않습니다. 
