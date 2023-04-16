@@ -1,15 +1,21 @@
-# [KoBERT By SKTBrain](https://github.com/SKTBrain/KoBERT)
+# KoBERT fine-tuning
+* [KoBERT By SKTBrain](https://github.com/SKTBrain/KoBERT)
+  * [How to Install](#how-to-install)
+  * [Requirement](#requirement)
+  * [Class and function definitions](#class-and-function-definitions)
 
-## How to Install
+*****
+
+### How to Install
 * Install KoBERT as a python package
 
 <pre><code>!pip install git+https://git@github.com/SKTBrain/KoBERT.git@master
 !pip install 'git+https://github.com/SKTBrain/KoBERT.git#egg=kobert_tokenizer&subdirectory=kobert_hf'</code></pre>
 
-## Requirement
+### Requirement
 * see [requirement.txt](https://github.com/kungminno/ETRI/blob/main/KoBERT/requirements.txt)
 
-## Class and function definitions
+### Class and function definitions
 * BERTDataset Class
 * BERTClassifier Class
 * FocalLoss Class
