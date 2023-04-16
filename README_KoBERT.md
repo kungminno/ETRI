@@ -26,6 +26,29 @@
 *****
 
 ## Learned model Test
+### Introduction
+
+This code loads and preprocesses a test dataset, and then tests the accuracy of multiple pre-trained models on the test dataset. The model with the highest accuracy is then selected as the best model.
+
+### Dependencies
+
+The following libraries are required to run this code:
+* pandas
+* torch
+* transformers (assuming tok is an instance of BertTokenizer)
+
+### Usage
+
+1. Provide the file path of the test dataset CSV file.
+2. Read the CSV file into a pandas dataframe and preprocess it by dropping null values and empty rows.
+3. Convert the test dataset into a list of texts and create a BERTDataset instance.
+4. Create a data loader for the test dataset.
+5. Test the accuracy of multiple pre-trained models using the test_models function, which is not shown in this code snippet.
+6. Select the model with the highest accuracy by finding its index in the list of model file paths.
+7. Get the filepath of the best model.
+
+### Output
+The output of this code is the filepath of the pre-trained model with the highest accuracy on the test dataset.
 
 *****
 
@@ -50,7 +73,7 @@ The following libraries are required to run this code:
 The output of this code is a classification report, which contains precision, recall, F1-score, and support for each class. The classification report provides an evaluation of how well the model is performing on each label.
 
 ### Note
-The learned model used in the prediction we developed can be downloaded from the following link.
+*The learned model used in the prediction we developed can be downloaded from the following link.*
 
 * [Focal_KoBERT_e10_b64_fold_5.pt](https://drive.google.com/file/d/1-ksRR8nnxkIb3AG0k345_udQjcAN3_ga/view?usp=share_link)
 
