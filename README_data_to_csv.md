@@ -11,6 +11,11 @@
 5. 저장된  딕셔너리를 이용하여 json 파일을 생성합니다.
 6. 생성된 json 파일을 이용하여 csv 파일을 생성합니다.
 
+### Functions
+* [column_extraction]([#column-extraction](#column_extraction))
+* [clean_file_content]([#clean-file-content](#column_extraction))
+* [process_emotion]([#process-emotion](#process_emotion))
+
 ### Note
 *코드 실행 시 사용자 환경에 맞는 데이터셋 경로 설정이 필요합니다.*
 
@@ -27,8 +32,6 @@
 4. 데이터프레임의 인덱스를 재설정하고, 행을 무작위로 섞어 인덱스 배열을 생성합니다.
 5. 추출된 데이터프레임과 인덱스 배열을 반환합니다.
 
-*****
-
 ## clean_file_content  
 ### Introduction
 이 함수는 파일 내용에서 불필요한 문자를 제거하고 다중 공백을 제거하여 문자열을 반환하는 파이썬 함수입니다. 
@@ -38,8 +41,6 @@
 2. 반복문을 이용하여 각각의 불필요한 문자들을 파일 내용에서 제거합니다.
 3. re.sub() 함수를 이용하여 연속된 공백을 하나의 공백으로 변환합니다.
 4. 변경된 파일 내용을 반환합니다.
-
-*****
 
 ## process_emotion  
 ### Introduction
