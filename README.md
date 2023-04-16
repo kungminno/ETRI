@@ -8,7 +8,7 @@ make_csv.ipynb: KoBERT와 CNNRNN에 사용할 데이터 전처리 코드
 
 *****
 
-# data_to_csv
+# data_to_csv.ipynb
 
 
 ## main
