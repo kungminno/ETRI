@@ -50,7 +50,7 @@ The following libraries are required to run this code:
 The output of this code is a classification report, which contains precision, recall, F1-score, and support for each class. The classification report provides an evaluation of how well the model is performing on each label.
 
 ### Note
-The learned model used in the prediction can be downloaded from the following link.
+The learned model used in the prediction we developed can be downloaded from the following link.
 
 * [Focal_KoBERT_e10_b64_fold_5.pt](https://drive.google.com/file/d/1-ksRR8nnxkIb3AG0k345_udQjcAN3_ga/view?usp=share_link)
 
