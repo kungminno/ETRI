@@ -1,4 +1,4 @@
-# LSPMP 전체 코드 설명
+# LSPMP
 
 * [KoBERT](https://github.com/kungminno/ETRI/blob/main/README_KoBERT.md): 텍스트 데이터 기반 감정 분류 모델
 
