@@ -12,9 +12,9 @@
 6. 생성된 json 파일을 이용하여 csv 파일을 생성합니다.
 
 ### Functions
-* [column_extraction]([#column-extraction](#column_extraction))
-* [clean_file_content]([#clean-file-content](#column_extraction))
-* [process_emotion]([#process-emotion](#process_emotion))
+* [column_extraction](#column_extraction)
+* [clean_file_content](#clean_file_content)
+* [process_emotion](#process_emotion)
 
 ### Note
 *코드 실행 시 사용자 환경에 맞는 데이터셋 경로 설정이 필요합니다.*
