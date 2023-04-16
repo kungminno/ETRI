@@ -1,70 +1,50 @@
-CNNRNN 사용법
-=================
+# data_to_csv.ipynb
+
+*****
+
+    코드 실행 시 사용자 환경에 맞는 데이터셋 경로 설정이 필요합니다.
+
+## main
+> 이 코드는 KEMDy19 데이터셋을 이용하여 json 파일과 csv 파일을 생성하는 파이썬 프로그램입니다.
+
+1. KEMDy19 데이터셋의 annotation 폴더에 있는 모든 csv 파일을 읽어들입니다.
+2. 각 csv 파일마다 column_extraction 함수를 이용하여 데이터프레임과 인덱스 배열을 추출합니다.
+3. 추출된 데이터프레임과 인덱스 배열을 이용하여 train 데이터와 test 데이터로 분할합니다.
+4. process_emotion 함수를 이용하여 각 데이터의 감정 정보를 train_final과 test_final 딕셔너리에 저장합니다.
+5. 저장된 train_final과 test_final 딕셔너리를 이용하여 train.json과 test.json 파일을 생성합니다.
+6. 생성된 train.json과 test.json 파일을 이용하여 train.csv와 test.csv 파일을 생성합니다.
 
 
-### CNNRNN 주의 사항 
+> 각 함수의 역할은 다음과 같습니다.
 
- - __경로 지정 필요__
- - **CNN_RNN_fold_epoch60_e4.h5, test_final.pickle, train_final.pickle 파일은 아래 링크에서 다운로드 필요**
-    - [CNN_RNN_fold_epoch60_e4.h5](https://drive.google.com/file/d/1xxbqwqIjokoc57FtlGo6ZRyTNRkenemK/view?usp=sharing)
-    - [test_final.pickle](https://drive.google.com/file/d/1FK5WQv9CIXlG9CMH3aoN2gLLacXGuSaX/view?usp=sharing)
-    - [train_final.pickle](https://drive.google.com/file/d/1U8EMfPXQ9_sCPh29HLT8BLC6Ktk4nZnU/view?usp=sharing)
- - 그 외의 파일은 ETRI/CNNRNN 폴더 내 존재
- - Used library:  	
-    -   python==3.9
-    -   tensorflow==2.9.1
-    -   keras==2.9.0
-    -   librosa==0.9.2
-    -   matplot==0.1.9
-    -   matplotlib==3.5.2
-    -   numpy==1.22.4
-    -   opencv-python==4.6.0.66
-    -   pandas==1.3.5
-    -   scikit-learn==1.0.2
-    -   scipy==1.7.3
-    -   tqdm==4.64.0
-
-### data_CNNRNN: CNNRNN 데이터의 정제/통합/정리/변환 등 데이터 전처리 과정 및 결과 파일
- 
- 1. data_CNNRNN의 흐름:
-    - 각 annotation폴더에 있는 Session.csv데이터를 불러와 각 Session별로 8:2 비율로 train과 test로 나누고 json 파일로 저장 ('train.json', 'test.json')
-    - 위에 json 파일을 불러와 오디오 데이터 전처리에 편하게 수정 후 다시 저장 ('train_audio.json', 'test_audio.json')
-    - 음성 데이터에서 mel spectrogram 추출 후, 각 spectrogram의 이름/저장위치/감정label 정보를 담은 파일로 저장 ('data_train.pickle', 'data_test.pickle')
-    - 위의 데이터에서 spectrogram을 읽어 array 형식으로 데이터 삽입 후 파일 저장 ('train_final.pickle', 'test_final.pickle')
+1. column_extraction 함수는 csv 파일에서 필요한 데이터만 추출하여 데이터프레임과 인덱스 배열을 반환합니다.
+2. process_emotion 함수는 추출된 데이터프레임에서 감정 정보를 추출하여 딕셔너리에 저장합니다.
+3. save_json 함수는 딕셔너리를 json 파일로 저장합니다.
+4. json_to_csv 함수는 json 파일을 csv 파일로 변환합니다.
 
 
- 2. data_CNNRNN에서의 파일 설명: 
-	- train, test			: 각 Session 별 8:2 비율로 저장한 데이터(.json)
-	- train_audio, test_audio	: train_audio, test_audio 파일을 전처리 하기 편하게 변환시킨 데이터(.json)
-	- data_train, data_test		: train_audio, test_audio 파일을 데이터프레임 형식으로 변환 후, mel spectrogram 추출. 해당 spectrogram의 정보(파일명, 저장 위치, label)를 담은 딕셔너리 형식 파일(.pickle)
-        - ex
-		> data_train['id'][0] = 'Sess01_impro04_F013'  
-    	>data_train['path'][0] = './Sess01_impro04_F013.png'  
-    	>data_train['emotion'][0] = 1  
+## column_extraction
+> 이 함수는 KEMDy19 데이터셋의 csv 파일에서 필요한 열만 추출하여 데이터프레임과 인덱스 배열을 반환하는 파이썬 함수입니다.
 
-	- train_final, test_final	: data_train, data_test에서 ['path']에 존재하는 이미지를 불러와 딕셔너리 값으로 변경한 딕셔너리 형식 파일(.pickle)
-        - ex
-		> train_final['id'][0] = 'Sess01_impro04_F013'  
-    	> train_final['path'][0] = [[[  1,   0,   0],[  2,   0,   0], [  2,   0,   0]...,[  2,   0,   0],[  2,   0,   0],[  2,   0,   0]] ...,   
-   	 	> train_final['emotion'][0] = 1  
+1. csv 파일을 pandas 라이브러리를 이용하여 읽어들입니다.
+2. 데이터프레임에서 'Segment ID'와 'Total Evaluation' 열만 추출 후 첫 번째 행은 삭제합니다.
+3. 'Segment ID' 열에서 파일 이름과 일치하지 않는 데이터와 'Total Evaluation' 열에서 중복된 데이터를 삭제합니다.
+4. 데이터프레임의 인덱스를 재설정하고, 행을 무작위로 섞어 인덱스 배열을 생성합니다.
+5. 추출된 데이터프레임과 인덱스 배열을 반환합니다.
 
 
-### main_CNNRNN: CNNRNN 모델 학습 파일
- 1. main_CNNRNN의 흐름:
-	- ResNet50 + LSTM bulid model 함수 선언
-	- Train dataset load
-	- 5-fold cross-validation 적용해서 모델 학습(이 모델을 다 돌려보지 않아도 기존의 완성된 모델 load해서 사용 가능)
-	- Test dataset load
-	- 위에서 돌린 모델 or 미리 완성해 load한 모델을 사용해 test dataset predict
+## clean_file_content
+> 이 함수는 파일 내용에서 불필요한 문자를 제거하고 다중 공백을 제거하여 문자열을 반환하는 파이썬 함수입니다.
 
-    CNNRNN parameter values 
-    > Learning Rate		: 1e-4  
-    > Batch size			: 16    
-    > Epoch				: 60
-    > Optimization Function	: Adam(beta_1=0.9, beta_2=0.999)    
+1. 파일 내용에서 제거할 불필요한 문자들을 unwanted_chars 변수에 지정합니다.
+2. 반복문을 이용하여 각각의 불필요한 문자들을 파일 내용에서 제거합니다.
+3. re.sub() 함수를 이용하여 연속된 공백을 하나의 공백으로 변환합니다.
+4. 변경된 파일 내용을 반환합니다.
 
+## process_emotion
+> 이 함수는 주어진 DataFrame에서 선택한 인덱스의 음성 파일에 대한 정보를 추출하고, 감정 레이블에 따라 사전(dictionary)에 정보를 저장하는 파이썬 함수입니다.
 
- 2. main_CNNRNN에서의 파일 설명:
-	- train_final, test_final	: CNNRNN 모델 학습에 사용될 train dataset과 test dataset(.pickle)
-	- CNN_RNN_fold_epoch60_e4	: 완성된 CNNRNN 모델 파일(.h5)
-
+1. DataFrame에서 주어진 인덱스(idx_array)를 이용하여 각각의 텍스트 및 음성 파일에 대한 정보를 추출합니다.
+2. 추출한 정보를 이용하여 파일 경로 및 파일 내용을 가져옵니다.
+3. 감정 레이블(total_eval)이 emotions 리스트에 있는 경우, 해당 음성 파일에 대한 정보를 dictionary에 저장합니다. 저장되는 정보는 Emotion, Label, WavPath, Text 입니다.
+4. 감정 레이블(total_eval)이 emotions 리스트에 없는 경우 해당 파일은 처리되지 않습니다. 
