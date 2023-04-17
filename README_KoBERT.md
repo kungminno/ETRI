@@ -28,10 +28,45 @@
 * [new_softmax](#new_softmax)
 * [predict](#predict)
 
-### BERTDataset 
+### BERTDataset
+#### Introduction
+이 클래스는 BERT 모델의 입력 형식에 맞게 데이터셋을 변환하는 클래스입니다.
+
+#### Class Parameters
+* <code>dataset</code>: 데이터셋
+* <code>sent_idx</code>: 문장 인덱스
+* <code>label_idx</code>: 레이블 인덱스
+* <code>bert_tokenizer</code>: BERT tokenizer
+* <code>max_len</code>: 최대 시퀀스 길이
+* <code>pad</code>: 패딩 값
+* <code>pair</code>: 문장 쌍 여부
+
+
+#### Method
+* <code>getitem</code>: 데이터셋에서 인덱스 i에 해당하는 데이터(문장과 레이블을 묶은)를 반환, 반환값은 튜플 형태
+* <code>len</code>: 데이터셋의 샘플 수를 반환
+
+#### Output
+BERT 모델에 입력될 수 있는 형식으로 변환된 문장 정보(token_id, valid_length, segment_id)와 해당 문장의 레이블 정보를 튜플 형태로 반환하고, 데이터셋의 샘플 수를 반환합니다.
 
 
 ### BERTClassifier
+#### Introduction
+이 클래스는 BERT 모델을 이용하여 분류 작업을 수행하는 클래스입니다.
+
+#### Class Parameters
+* <code>bert</code>: 입력값을 처리하는 BERT 모델
+* <code>dr_rate</code>: 드롭아웃 비율을 설정할 수 있는 인자
+* <code>classifier</code>: 최종 출력값을 구하기 위한 선형 레이어
+
+#### Method
+* <code>gen_attention_mask</code>: 입력 토큰 시퀀스와 각 토큰의 유효 길이를 이용하여 어텐션 마스크를 생성하는 함수
+* <code>forward</code>: 입력값을 받아 BERT 모델을 통과시켜 분류 결과를 반환하는 함수
+  1. forward 함수는 입력값으로 <code>token_ids</code>, <code>valid_length</code>, <code>segment_ids</code>를 받으며, gen_attention_mask 함수를 이용하여 attention_mask를 생성합니다. 이때 segment_ids는 BERT 모델의 세그먼트 ID를 나타내며, attention_mask는 입력값의 길이만큼 1로 채워진 텐서입니다.
+  2. BERT 모델을 통과시켜 [CLS] 토큰의 출력값인 pooler를 구합니다. 만약 dr_rate가 존재한다면, dropout을 적용하고 classifier 레이어를 통과시켜 최종 출력값을 구합니다. 만약 dr_rate가 없다면, pooler를 그대로 classifier 레이어에 통과시켜 최종 출력값을 구합니다.
+
+#### Output
+최종 출력값은 분류하고자 하는 클래스 수(num_classes)와 동일한 차원을 가지는 텐서입니다.
 
 
 ### FocalLoss
@@ -39,9 +74,9 @@
 이 클래스는 PyTorch의 nn.Module 클래스를 상속받아 생성된 클래스입니다.
 
 #### Class Parameters
-* <code>alpha</code>는 클래스 간 불균형을 보정하기 위한 가중치입니다. 
-* <code>gamma</code>는 어려운 샘플에 대한 가중치를 증가시키는 파라미터입니다. 
-* <code>reduction</code> 매개 변수는 출력값의 reduce 방법을 정의합니다.
+* <code>alpha</code>: 클래스 간 불균형을 보정하기 위한 가중치입니다. 
+* <code>gamma</code>: 어려운 샘플에 대한 가중치를 증가시키는 파라미터입니다. 
+* <code>reduction</code> 매개 변수: 출력값의 reduce 방법을 정의합니다.
 
 #### Method
 <code>forward()</code> 메소드는 입력값과 대상값을 받아 사용됩니다. 
@@ -51,8 +86,8 @@
 
 #### Output
 <code>reduction</code> 매개 변수에 따라 F_loss의 출력값이 달라집니다. 
-* <code>'mean'</code>으로 설정하면 손실값의 평균이 반환됩니다.
-* <code>'sum'</code>으로 설정하면 손실값의 합이 반환됩니다.
+* 'mean'으로 설정하면 손실값의 평균이 반환됩니다.
+* 'sum'으로 설정하면 손실값의 합이 반환됩니다.
 * 설정하지 않으면, 원본 손실 값인 F_loss가 반환됩니다.
 
 
