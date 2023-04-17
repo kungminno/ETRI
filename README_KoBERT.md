@@ -3,6 +3,9 @@
   * [How to Install](#how-to-install)
   * [Requirement](#requirement)
   * [Class and function definitions](#class-and-function-definitions)
+* [Model Learning](#model-learning)
+* [Learned model Test](#learned-model-test)
+* [Learned model Predict](#learned-model-predict)
 
 *****
 
@@ -153,7 +156,7 @@ learning_rate = 5e-5</code></pre>
 
 *****
 
-## Learned model Prediction
+## Learned model Predict
 ### Introduction
 이 코드는 텍스트와 true label을 포함하는 CSV 파일을 읽어들이고, 미리 학습된 모델을 사용하여 텍스트의 predict label을 생성합니다. predict label은 리스트에 저장되며, 그 다음 scikit-learn 라이브러리를 사용하여 classification report를 생성합니다.
 
