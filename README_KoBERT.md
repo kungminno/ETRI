@@ -16,14 +16,22 @@
 * see [requirement.txt](https://github.com/kungminno/ETRI/blob/main/KoBERT/requirements.txt)
 
 ### Class and function definitions
-* BERTDataset Class
-* BERTClassifier Class
-* FocalLoss Class
+* [BERTDataset](#bertdataset)
+* [BERTClassifier](#bertclassifier)
+* [FocalLoss](#focalloss)
 
-* calc_accuracy
-* test_models
-* new_softmax
-* predict
+* [calc_accuracy](#calc_accuracy)
+* [test_models](#test_models)
+* [new_softmax](#new_softmax)
+* [predict](#predict)
+
+### BERTDataset 
+### BERTClassifier
+### FocalLoss
+### calc_accuracy
+### test_models
+### new_softmax
+### predict
 
 *****
 
