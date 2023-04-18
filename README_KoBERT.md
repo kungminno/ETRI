@@ -18,6 +18,24 @@
 ### Requirement
 * see [requirement.txt](https://github.com/kungminno/ETRI/blob/main/KoBERT/requirements.txt)
 
+### Note
+* 데이터셋 경로 설정: 데이터셋을 로드하기 위해 올바른 파일 경로를 설정해야 합니다.
+* 모델 및 결과 저장 경로 설정: 학습된 모델과 결과를 저장할 경로를 설정해야 합니다.
+
+### Dependencies
+* <code>torch</code>: PyTorch 라이브러리는 딥러닝 모델 학습 및 추론에 사용되며, GPU 지원 및 다양한 딥러닝 모델을 구현할 수 있는 기능을 제공합니다.
+* <code>torch.nn</code>: PyTorch에서 제공하는 neural network 모듈로, 다양한 신경망 계층 및 손실 함수를 제공합니다.
+* <code>torch.optim</code>: PyTorch에서 제공하는 최적화 알고리즘 모듈로, 다양한 최적화 알고리즘(예: Adam, SGD 등)을 제공합니다.
+* <code>gluonnlp</code>: GluonNLP는 자연어 처리를 위한 MXNet 기반 라이브러리로, 다양한 자연어 처리 기능을 제공합니다. 이 프로젝트에서는 KoBERT 관련 모듈을 사용합니다.
+* <code>numpy</code>: 수치 계산을 위한 파이썬 라이브러리로, 다차원 배열 객체 및 이러한 배열을 처리할 수 있는 도구를 제공합니다.
+* <code>pandas</code>: 데이터 분석 및 조작을 위한 파이썬 라이브러리로, 데이터 전처리 및 분석 작업을 쉽게 수행할 수 있게 합니다.
+* <code>matplotlib</code>: 데이터 시각화를 위한 파이썬 라이브러리로, 선 그래프, 히스토그램, 산점도 등 다양한 차트와 플롯을 그릴 수 있게 합니다.
+* <code>csv</code>: CSV 파일을 읽고 쓰는 기능을 제공하는 파이썬 표준 라이브러리입니다.
+* <code>os</code>: 운영 체제와 상호 작용하기 위한 파이썬 표준 라이브러리로, 파일 및 디렉토리 작업을 수행할 수 있게 합니다.
+* <code>json</code>: JSON 데이터를 인코딩 및 디코딩하기 위한 파이썬 표준 라이브러리입니다.
+* <code>transformers</code>: Hugging Face의 Transformers 라이브러리는 자연어 처리를 위한 사전 훈련된 모델을 제공하며, 여기서는 KoBERT 모델 학습 및 평가에 사용됩니다.
+* <code>sklearn</code>: Scikit-learn은 머신러닝 및 데이터 분석을 위한 파이썬 라이브러리로, 여기서는 교차 검증을 위한 StratifiedKFold와 모델 성능 평가를 위한 classification_report를 사용합니다
+
 ### Class and function definitions
 * [BERTDataset](#bertdataset)
 * [BERTClassifier](#bertclassifier)
@@ -156,60 +174,51 @@ BERT 모델에 입력될 수 있는 형식으로 변환된 문장 정보(token_i
 *****
 
 ## Model Learning
-<pre><code>max_len = 64
-batch_size = 64
-warmup_ratio = 0.1
-num_epochs = 10  
-max_grad_norm = 1
-log_interval = 200
-learning_rate = 5e-5</code></pre>
+<pre><code>max_len = 64  //입력 시퀀스의 최대 길이
+batch_size = 64         //한 번에 처리할 데이터 개수
+warmup_ratio = 0.1      //학습률 스케줄러의 warmup 비율
+num_epochs = 10         //전체 학습 데이터에 대한 학습 횟수
+max_grad_norm = 1       //기울기 클리핑을 위한 최대 기울기 값
+log_interval = 200      //로그 출력 간격
+learning_rate = 5e-5    //학습률</code></pre>
+
+### Introduction
+이 코드는 텍스트 데이터를 이용하여 감정 분석을 수행하는 과정입니다.
+
+### Usage
+### Output
+
 
 *****
 
 ## Learned model Test
 ### Introduction
-
-이 코드는 테스트 데이터셋을 로드하고 전처리한 다음, 여러 미리 학습된 모델들의 정확도를 테스트합니다. 가장 높은 정확도를 가진 모델이 최고의 모델로 선택됩니다.
-
-### Dependencies
-
-이 코드를 실행하려면 다음 라이브러리가 필요합니다:
-* pandas
-* torch
-* transformers (assuming tok is an instance of BertTokenizer)
+이 코드는 테스트 데이터셋을 불러와 각각의 모델에 대한 정확도를 계산한 후, 가장 높은 정확도를 가진 최적의 모델을 찾는 과정입니다.
 
 ### Usage
-1. 테스트 데이터셋 CSV 파일의 파일 경로를 제공합니다.
-2. CSV 파일을 데이터프레임으로 읽어들이고 null 값 및 빈 행을 삭제하여 전처리합니다.
-3. 텍스트 리스트로 테스트 데이터셋을 변환하고 BERTDataset 인스턴스를 생성합니다.
-4. 테스트 데이터셋을 위한 데이터 로더를 만듭니다.
-5. test_models 함수를 사용하여 여러 미리 학습된 모델들의 정확도를 테스트합니다.
-6. 가장 높은 정확도를 가진 모델의 인덱스를 모델 파일 경로의 리스트에서 찾아 선택 후 그 모델의 파일 경로를 얻습니다.
+1. 테스트 데이터셋이 포함된 CSV파일을 불러옵니다.
+2. CSV 파일을 데이터프레임으로 읽어들여 결측값을 제거하고 전처리를 수행한 후, 테스트 데이터셋의 텍스트르 리스트로 만듭니다.
+3. 'BERTDataset' 클래스를 사용하여 테스트 데이터셋을 변환하고, 모델 테스트에 사용되는 데이터 로더를 생성합니다.
+4. 미리 학습된 각 모델의 가중치 파일에 대해 'test_models()' 함수를 호출하여 모델의 정확도를 계산하고 결과르 리스트에 저장합니다.
+5. 가장 높은 정확도를 가진 최적의 모델의 가중치 파일 경로를 찾습니다.
 
 ### Output
-이 코드의 출력물은 테스트 데이터셋에서 가장 높은 정확도를 가진 미리 학습된 모델의 파일 경로입니다.
+이 코드는 가장 높은 정확도를 가진 최적의 모델의 가중치 파일 경로를 출력합니다.
 
 *****
 
 ## Learned model Predict
 ### Introduction
-이 코드는 텍스트와 true label을 포함하는 CSV 파일을 읽어들이고, 미리 학습된 모델을 사용하여 텍스트의 predict label을 생성합니다. predict label은 리스트에 저장되며, 그 다음 scikit-learn 라이브러리를 사용하여 classification report를 생성합니다.
-
-### Dependencies
-이 코드를 실행하려면 다음 라이브러리가 필요합니다:
-* torch
-* csv
-* scikit-learn
+이 코드는 학습된 최적의 모델을 불러와서 테스트 데이터셋에 대한 예측을 수행하고, 모델의 성능을 평가합니다.
 
 ### Usage
-1. 저장된 모델 파일의 경로를 제공하여 미리 학습된 모델을 불러옵니다.
-2. 텍스트와 true label을 포함하는 CSV 파일을 읽어들입니다.
-3. CSV 파일의 각 행에 대해 반복하며, 각 텍스트에 대해 미리 학습된 모델을 사용하여 predict label을 생성합니다.
-4. true label과 predict label을 별도의 리스트에 저장합니다.
-5. scikit-learn 라이브러리를 사용하여 classification report를 생성하고, 대상 이름의 리스트(the list of target names)를 제공합니다.
+1. torch.load() 함수를 사용하여 사전에 학습 및 저장한 최적의 모델을 불러오고, load_state_dict() 함수를 사용하여 모델의 가중치를 불러옵니다.
+2. 테스트 데이터셋이 포함된 CSV 파일을 읽어 들입니다.
+3. 각 테스트 데이터의 문장과 라벨에 대해 예측을 수행하고, 실제 라벨과 예측 라벨을 각각 리스트에 저장합니다.
+4. classification_report 함수를 사용하여 모델의 성능을 평가합니다. 이 함수는 각 클래스에 대한 정밀도(precision), 재현율(recall), F1-점수(F1-score)를 계산하여 출력합니다. 이 코드에서는 감정 분류 문제에 대한 평가 결과를 출력하므로, 대상 클래스 이름(target_names)을 설정합니다.
 
 ### Output
-이 코드의 출력물은 classification report 입니다. 이 report는 각 클래스의 precision, recall, F1-score 및 support을 제공합니다. classification report는 모델이 각 레이블에서 얼마나 잘 수행되고 있는지를 평가하는 데 사용됩니다.
+이 코드는 classification report를 출력합니다. 이를 통해 모델의 성능을 확인할 수 있고, 이를 바탕으로 모델이 각 클래스를 얼마나 잘 분류하는지 평가할 수 있습니다.
 
 ### Note
 *<code>Learned model Prediction</code>에서 사용되는 우리 개발한 학습 모델은 다음 링크에서 다운로드할 수 있습니다.*
