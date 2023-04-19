@@ -12,4 +12,4 @@
 
 #### DataSet
 모델 개발에 사용된 원본 데이터 셋은 다음과 같습니다.
-* ETRI 한국어 감정 데이터셋 - [KEMDy19 (성우 대상 상황극) 데이터셋](https://nanum.etri.re.kr/share/kjnoh/KEMDy19?lang=ko_KR)
+> ETRI 한국어 감정 데이터셋 - [KEMDy19 (성우 대상 상황극) 데이터셋](https://nanum.etri.re.kr/share/kjnoh/KEMDy19?lang=ko_KR)
