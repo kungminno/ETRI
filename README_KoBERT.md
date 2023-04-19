@@ -19,22 +19,24 @@
 * see [requirement.txt](https://github.com/kungminno/ETRI/blob/main/KoBERT/requirements.txt)
 
 ### Note
-* 데이터셋 경로 설정: 데이터셋을 로드하기 위해 올바른 파일 경로를 설정해야 합니다.
-* 모델 및 결과 저장 경로 설정: 학습된 모델과 결과를 저장할 경로를 설정해야 합니다.
+> *데이터셋 경로 설정: 데이터셋을 로드하기 위해 올바른 파일 경로를 설정해야 합니다.*<br>
+> *모델 및 결과 저장 경로 설정: 학습된 모델과 결과를 저장할 경로를 설정해야 합니다.*
+
 
 ### Dependencies
-* <code>torch</code>: PyTorch 라이브러리는 딥러닝 모델 학습 및 추론에 사용되며, GPU 지원 및 다양한 딥러닝 모델을 구현할 수 있는 기능을 제공합니다.
-* <code>torch.nn</code>: PyTorch에서 제공하는 neural network 모듈로, 다양한 신경망 계층 및 손실 함수를 제공합니다.
-* <code>torch.optim</code>: PyTorch에서 제공하는 최적화 알고리즘 모듈로, 다양한 최적화 알고리즘(예: Adam, SGD 등)을 제공합니다.
-* <code>gluonnlp</code>: GluonNLP는 자연어 처리를 위한 MXNet 기반 라이브러리로, 다양한 자연어 처리 기능을 제공합니다. 이 프로젝트에서는 KoBERT 관련 모듈을 사용합니다.
-* <code>numpy</code>: 수치 계산을 위한 파이썬 라이브러리로, 다차원 배열 객체 및 이러한 배열을 처리할 수 있는 도구를 제공합니다.
-* <code>pandas</code>: 데이터 분석 및 조작을 위한 파이썬 라이브러리로, 데이터 전처리 및 분석 작업을 쉽게 수행할 수 있게 합니다.
-* <code>matplotlib</code>: 데이터 시각화를 위한 파이썬 라이브러리로, 선 그래프, 히스토그램, 산점도 등 다양한 차트와 플롯을 그릴 수 있게 합니다.
-* <code>csv</code>: CSV 파일을 읽고 쓰는 기능을 제공하는 파이썬 표준 라이브러리입니다.
-* <code>os</code>: 운영 체제와 상호 작용하기 위한 파이썬 표준 라이브러리로, 파일 및 디렉토리 작업을 수행할 수 있게 합니다.
-* <code>json</code>: JSON 데이터를 인코딩 및 디코딩하기 위한 파이썬 표준 라이브러리입니다.
-* <code>transformers</code>: Hugging Face의 Transformers 라이브러리는 자연어 처리를 위한 사전 훈련된 모델을 제공하며, 여기서는 KoBERT 모델 학습 및 평가에 사용됩니다.
-* <code>sklearn</code>: Scikit-learn은 머신러닝 및 데이터 분석을 위한 파이썬 라이브러리로, 여기서는 교차 검증을 위한 StratifiedKFold와 모델 성능 평가를 위한 classification_report를 사용합니다
+* <code>torch</code>
+* <code>torch.nn</code>
+* <code>torch.optim</code>
+* <code>numpy</code>
+* <code>pandas</code>
+* <code>matplotlib</code>
+* <code>csv</code>
+* <code>os</code>
+* <code>json</code>
+* <code>sklearn</code>
+* <code>transformers</code>
+* <code>gluonnlp</code>
+
 
 ### Class and function definitions
 * [BERTDataset](#bertdataset)
@@ -92,9 +94,9 @@ BERT 모델에 입력될 수 있는 형식으로 변환된 문장 정보(token_i
 이 클래스는 PyTorch의 nn.Module 클래스를 상속받아 생성된 클래스입니다.
 
 #### Class Parameters
-* <code>alpha</code>: 클래스 간 불균형을 보정하기 위한 가중치입니다. 
-* <code>gamma</code>: 어려운 샘플에 대한 가중치를 증가시키는 파라미터입니다. 
-* <code>reduction</code> 매개 변수: 출력값의 reduce 방법을 정의합니다.
+* <code>alpha</code>: 클래스 간 불균형을 보정하기 위한 가중치 
+* <code>gamma</code>: 어려운 샘플에 대한 가중치를 증가시키는 파라미터 
+* <code>reduction</code> 매개 변수: 출력값의 reduce 방법을 정의
 
 #### Method
 <code>forward()</code> 메소드는 입력값과 대상값을 받아 사용됩니다. 
@@ -174,20 +176,35 @@ BERT 모델에 입력될 수 있는 형식으로 변환된 문장 정보(token_i
 *****
 
 ## Model Learning
-<pre><code>max_len = 64  //입력 시퀀스의 최대 길이
-batch_size = 64         //한 번에 처리할 데이터 개수
-warmup_ratio = 0.1      //학습률 스케줄러의 warmup 비율
-num_epochs = 10         //전체 학습 데이터에 대한 학습 횟수
-max_grad_norm = 1       //기울기 클리핑을 위한 최대 기울기 값
-log_interval = 200      //로그 출력 간격
-learning_rate = 5e-5    //학습률</code></pre>
+```python
+max_len = 64            # 입력 시퀀스의 최대 길이
+batch_size = 64         # 한 번에 처리할 데이터 개수
+warmup_ratio = 0.1      # 학습률 스케줄러의 warmup 비율
+num_epochs = 10         # 전체 학습 데이터에 대한 학습 횟수
+max_grad_norm = 1       # 기울기 클리핑을 위한 최대 기울기 값
+log_interval = 200      # 로그 출력 간격
+learning_rate = 5e-5    # 학습률
+```
 
 ### Introduction
-이 코드는 텍스트 데이터를 이용하여 감정 분석을 수행하는 과정입니다.
+이 코드는 PyTorch를 기반으로 작성되어 있으며, KoBERT 모델을 사용하여 한국어 텍스트 데이터를 이용하여 감정 분석을 수행합니다.
 
 ### Usage
-### Output
+1. 필요한 라이브러리와 모델을 불러옵니다.
+2. 학습에 사용할 데이터셋이 포함된 CSV 파일을 불러옵니다. 결측값이 있는 데이터는 삭제하고, 각 텍스트와 레이블을 리스트 형태로 변환하여 학습 데이터를 준비합니다.
+3. K-Fold 교차 검증을 사용하기 위해 K를 5로 설정하여 5-Fold 교차 검증을 수행합니다.
+4. 각 Fold에 대해 모델을 학습하고 검증합니다. 이 때, 옵티마이저로는 AdamW를 사용하며, 손실 함수로는 Focal Loss를 사용합니다. 또한, 스케줄러를 사용하여 학습률을 조절합니다.
+5. 각 Fold에 대한 학습이 완료되면, 해당 모델을 파일로 저장합니다.
+6. 학습 과정 중 손실(loss) 및 정확도(accuracy)의 변화를 그래프로 시각화하여 결과를 확인합니다.
 
+### Output
+이 코드는 다음과 같은 결과를 출력합니다.
+1. 각 epoch 및 batch에 대해 학습 정확도, 학습 손실, 검증 정확도, 검증 손실이 출력됩니다.
+2. 각 Fold에 대해 학습된 모델의 가중치를 파일로 저장합니다. 이 파일들은 나중에 다시 불러와 모델을 평가하거나 새로운 데이터에 대한 예측을 수행하는 데 사용할 수 있습니다. 파일의 형식은 다음과 같습니다:
+    * <code>모델 파일(.pt)</code>: 전체 모델 구조와 가중치를 포함합니다.
+    * <code>상태 사전 파일(_state_dict.pt)</code>: 모델의 가중치만 포함합니다.
+    * <code>전체 체크포인트 파일(_all.tar)</code>: 모델의 가중치와 옵티마이저의 상태를 포함합니다.
+3. 학습 및 검증 과정에서 손실과 정확도의 변화를 그래프로 시각화합니다.
 
 *****
 
