@@ -3,9 +3,8 @@
   * [How to Install](#how-to-install)
   * [Requirement](#requirement)
   * [Class and function definitions](#class-and-function-definitions)
-* [Model Learning](#model-learning)
-* [Learned model Test](#learned-model-test)
-* [Learned model Predict](#learned-model-predict)
+* [Model Train](#model-train)
+* [Model Test](#model-test)
 
 *****
 
@@ -41,7 +40,6 @@
 ### Class and function definitions
 * [BERTDataset](#bertdataset)
 * [BERTClassifier](#bertclassifier)
-* [FocalLoss](#focalloss)
 
 * [calc_accuracy](#calc_accuracy)
 * [test_models](#test_models)
@@ -87,28 +85,6 @@ BERT 모델에 입력될 수 있는 형식으로 변환된 문장 정보(token_i
 
 #### Output
 최종 출력값은 분류하고자 하는 클래스 수(num_classes)와 동일한 차원을 가지는 텐서입니다.
-
-
-### FocalLoss
-#### Introduction
-이 클래스는 PyTorch의 nn.Module 클래스를 상속받아 생성된 클래스입니다.
-
-#### Class Parameters
-* <code>alpha</code>: 클래스 간 불균형을 보정하기 위한 가중치 
-* <code>gamma</code>: 어려운 샘플에 대한 가중치를 증가시키는 파라미터 
-* <code>reduction</code> 매개 변수: 출력값의 reduce 방법을 정의
-
-#### Method
-<code>forward()</code> 메소드는 입력값과 대상값을 받아 사용됩니다. 
-* <code>BCE_loss</code>는 이진 교차 엔트로피 손실을 계산합니다. 
-* <code>pt</code>는 softmax 확률의 역수로 정의되어, 확률이 작을수록 커집니다. 
-* <code>F_loss</code>는 focal loss를 계산하기 위한 공식입니다.
-
-#### Output
-<code>reduction</code> 매개 변수에 따라 F_loss의 출력값이 달라집니다. 
-* 'mean'으로 설정하면 손실값의 평균이 반환됩니다.
-* 'sum'으로 설정하면 손실값의 합이 반환됩니다.
-* 설정하지 않으면, 원본 손실 값인 F_loss가 반환됩니다.
 
 
 ### calc_accuracy
@@ -175,7 +151,7 @@ BERT 모델에 입력될 수 있는 형식으로 변환된 문장 정보(token_i
 
 *****
 
-## Model Learning
+## Model Train
 ```python
 max_len = 64            # 입력 시퀀스의 최대 길이
 batch_size = 64         # 한 번에 처리할 데이터 개수
@@ -208,9 +184,9 @@ learning_rate = 5e-5    # 학습률
 
 *****
 
-## Learned model Test
+## Model Test
 ### Introduction
-이 코드는 테스트 데이터셋을 불러와 각각의 모델에 대한 정확도를 계산한 후, 가장 높은 정확도를 가진 최적의 모델을 찾는 과정입니다. 그 후 사전에 학습된 최적의 모델을 로드하고, classification report를 출력합니다.
+이 코드는 테스트 데이터셋을 불러와 각각의 모델에 대한 정확도를 계산한 후, 가장 높은 정확도를 가진 최적의 모델을 찾는 과정입니다.
 
 ### Usage
 1. 테스트 데이터셋이 포함된 CSV파일을 불러옵니다.
@@ -218,33 +194,12 @@ learning_rate = 5e-5    # 학습률
 3. 'BERTDataset' 클래스를 사용하여 테스트 데이터셋을 변환하고, 모델 테스트에 사용되는 데이터 로더를 생성합니다.
 4. 미리 학습된 각 모델의 가중치 파일에 대해 'test_models()' 함수를 호출하여 모델의 정확도를 계산하고 결과르 리스트에 저장합니다.
 5. 가장 높은 정확도를 가진 최적의 모델의 가중치 파일 경로를 찾습니다.
-6. 최적의 모델을 기준으로 classification_report 함수를 사용하여 모델의 성능을 평가합니다. 이 함수는 각 클래스에 대한 정밀도(precision), 재현율(recall), F1-점수(F1-score)를 계산하여 출력합니다. 이 코드에서는 감정 분류 문제에 대한 평가 결과를 출력하므로, 대상 클래스 이름(target_names)을 설정합니다.
 
 ### Output
-이 코드는 가장 높은 정확도를 가진 최적의 모델의 가중치 파일 경로와 classification report를 출력합니다.
-
-*****
-
-## Learned model Predict
-### Introduction
-이 코드는 저장된 최적의 감정 예측 모델을 로드하고, 테스트 데이터셋에 대한 예측을 수행합니다.
-
-### Usage
-1. torch.load() 함수를 사용하여 사전에 학습 및 저장한 최적의 모델을 불러오고, load_state_dict() 함수를 사용하여 모델의 가중치를 불러옵니다.
-2. 테스트 데이터셋이 포함된 CSV 파일을 읽어 들입니다.
-3. 각 테스트 데이터의 문장과 라벨에 대해 예측을 수행하고, 실제 라벨과 예측 라벨을 각각 리스트에 저장합니다.
-4. 각각의 라벨을 매핑된 감정으로 변환하고 예측된 감정과 확률을 출력합니다.
-
-### Output
-이 코드는 결과로 다음의 정보를 포함된 예측을 출력합니다.
-* 데이터의 ID
-* 테스트 문장
-* 실제 감정 레이블
-* 예측된 감정 레이블
-* 예측된 감정 레이블의 확률
+이 코드는 가장 높은 정확도를 가진 최적의 모델의 가중치 파일 경로를 출력합니다.
 
 ### Note
-*<code>Learned model Prediction</code>에서 사용되는 우리 개발한 학습 모델은 다음 링크에서 다운로드할 수 있습니다.*
+*<code>Model Test</code>에서 사용되는 우리 개발한 학습 모델은 다음 링크에서 다운로드할 수 있습니다.*
 
 * [Sparse_KoBERT_e10_b64_fold_4.pt](https://drive.google.com/file/d/1-QTGV6Im6NZjIrCm1NYW73u8gfEbGSp3/view?usp=share_link)
 
