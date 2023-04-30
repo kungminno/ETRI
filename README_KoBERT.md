@@ -32,7 +32,6 @@
 * <code>csv</code>
 * <code>os</code>
 * <code>json</code>
-* <code>sklearn</code>
 * <code>transformers</code>
 * <code>gluonnlp</code>
 
@@ -43,8 +42,6 @@
 
 * [calc_accuracy](#calc_accuracy)
 * [test_models](#test_models)
-* [new_softmax](#new_softmax)
-* [predict](#predict)
 
 ### BERTDataset
 #### Introduction
@@ -120,34 +117,6 @@ BERT 모델에 입력될 수 있는 형식으로 변환된 문장 정보(token_i
 #### Output
 결과값은 <code>test_acc</code>로 반환되며, 테스트 정확도를 나타냅니다.
 
-
-### new_softmax
-#### Introduction
-이 함수는 입력으로 받은 배열에 대해 소프트맥스 함수를 계산하여 각 요소의 확률값을 반환하는 함수입니다.
-
-#### Function Workflow
-1. 입력된 배열의 최대값을 찾고, 각 요소엣 최대값을 뺀 후 exp 함수를 적용하여 각 요소의 값을 계산합니다. 이 과정은 overflow를 방지하기 위해 수행됩니다.
-2. 모든 요소에 대해 exp 함수를 적용하여 얻은 값들의 합을 구합니다.
-3. 이를 이용하여 소프트맥스 함수를 적용하고, 최종적으로 각 요소의 확률 값을 반환합니다. 이때, 반환되는 확률 값은 0~100 범위 내의 값으로 반환합니다.
-
-#### Output
-입력 배열의 요소 수와 같은 크기의 numpy 배열이며, 소숫점 셋째 자리에서 반올림된 각 요소의 확률 값들로 이루어집니다.
-
-
-### predict
-#### Introduction
-이 함수는 문장과 해당 문장의 실제 레이블을 입력으로 받아 각 감정 클래스의 예측된 레이블과 확률을 반환하는 함수입니다.
-
-#### Function Workflow
-1. 입력 문장과 실제 레이블로 데이터셋을 생성하고, BERT 토크나이저를 사용하여 입력 텍스트를 토크나이즈합니다.
-2. 감정 분류를 위해 사전 훈련된 BERT 모델에 토큰화된 입력을 전달합니다.
-3. BERT 모델은 각 감정 클래스에 대한 로짓의 목록을 출력하고, 이를 소프트맥스 함수를 사용하여 확률로 변환합니다.
-4. 예측된 레이블은 가장 높은 확률을 가진 감정 클래스를 선택하여 결정합니다.
-
-#### Output
-* <code>y_true</code>: 입력 문장의 실제 레이블 리스트
-* <code>y_pred</code>: 예측된 레이블 리스트
-* <code>probabilities</code>: 각 감정 클래스의 예측된 확률의 리스트
 
 *****
 
