@@ -246,8 +246,8 @@ learning_rate = 5e-5    # 학습률
 ### Note
 *<code>Learned model Prediction</code>에서 사용되는 우리 개발한 학습 모델은 다음 링크에서 다운로드할 수 있습니다.*
 
-* [Focal_KoBERT_e10_b64_fold_5.pt](https://drive.google.com/file/d/1-ksRR8nnxkIb3AG0k345_udQjcAN3_ga/view?usp=share_link)
+* [Sparse_KoBERT_e10_b64_fold_4.pt](https://drive.google.com/file/d/1-QTGV6Im6NZjIrCm1NYW73u8gfEbGSp3/view?usp=share_link)
 
-* [Focal_KoBERT_e10_b64_fold_5_state_dict.pt](https://drive.google.com/file/d/10-wtu9ZRTyrf9ptGilPplQxllN-sc_wv/view?usp=share_link)
+* [Sparse_KoBERT_e10_b64_fold_4_state_dict.pt](https://drive.google.com/file/d/1-SuwQgRnYFvGrZYljSvOd3Q--XCQ4HwJ/view?usp=share_link)
 
-* [Focal_KoBERT_e10_b64_fold_5_all.tar](https://drive.google.com/file/d/106QgpX75WSZI0rO1QxIDrxtWHx9ghmOZ/view?usp=share_link)
+* [Sparse_KoBERT_e10_b64_fold_4_all.tar](https://drive.google.com/file/d/1-VHb1PVXqnEVeGqg_bHbdubEsww7zvw0/view?usp=share_link)
